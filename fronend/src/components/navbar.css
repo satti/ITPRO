@@ -1,0 +1,12 @@
+.nav {
+    font-size: x-large;
+    font: bolder;
+    background-color: rgb(133, 183, 25);
+    color: rgb(171, 9, 9);
+}
+.nav-link {
+    color: white;
+}
+.nav-item {
+    color: white;
+}
