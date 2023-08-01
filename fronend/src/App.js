@@ -2,6 +2,7 @@ import { BrowserRouter, Routes,Route} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar'
 import Subjects from './pages/Subjects'
+import SubCreate from './pages/SubCreate'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/subjects' Component={Subjects}> </Route>
+          <Route path='/create' element={<SubCreate /> } exact></Route>
         </Routes>
       </BrowserRouter>
     </div>

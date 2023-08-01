@@ -22,7 +22,7 @@ def create_subject(request):
             return Response(serializer.data, status.HTTP_201_CREATED)
         return Response(serializer.data, status.HTTP_400_BAD_REQUEST)
 
-@api_view(['DELETE','GET'])
+@api_view(['DELETE','GET','PATCH'])
 def get_subject(request,pk):
     sub = Subjects.objects.get(id=pk)
     if request.method == 'GET':
@@ -31,4 +31,10 @@ def get_subject(request,pk):
     elif request.method == 'DELETE':
         sub.delete()
         return Response({'message': 'Subject Deleted...'})    
-
+    elif request.method == 'PATCH':
+        data = request.data
+        serializer = SubjectsSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.data, status.HTTP_400_BAD_REQUEST)
