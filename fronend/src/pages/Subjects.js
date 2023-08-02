@@ -4,6 +4,8 @@ import './subjects.css'
 import axios from "axios";
 const Subjects = () => {
     const [subjects, setSubjects] = useState([])
+    const [isEditing,setIsEditing] = useState(false)
+    const [editedRecord,setEditedRecord] = useState({id: '',year: '',sem: '',subject_code: '',subject_name: ''})
     useEffect(()=> {
         getsubjects()
     },[])
@@ -19,6 +21,11 @@ const Subjects = () => {
         .catch((error) => {
             console.log("error occured")
         })       
+    }
+
+    const handleEdit = (record) => {
+        setEditedRecord(record);
+        setIsEditing(true);
     }
     
     return (
@@ -42,8 +49,11 @@ const Subjects = () => {
                                 <td>{subject.subject_code}</td>
                                 <td>{subject.subject_name}</td>
                                 <td>
-                                    <Button variant='outline-success'>Update</Button>{' '}
+                                    <div>
+                                        {isEditing ? <Button variant='outline-success'>Update</Button>:
+                                    <Button variant='outline-success' onClick={()=>handleEdit(subject)}>Edit</Button>} {' '}
                                     <Button variant='outline-danger' onClick={()=>handleDelete(subject.id)}>Delete</Button>
+                                    </div>
                                 </td>
                             </tr>
                     ))}
